@@ -5,7 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af975087-c32d-49f1-afd0-e7b163e1de4b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB/userDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/DB/userDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB/userDB.sqbpro" beforeDir="false" afterPath="$PROJECT_DIR$/DB/userDB.sqbpro" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Plataforma/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Plataforma/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/FilmeInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/FilmeInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/Filmes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/Filmes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/Locacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/Locacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/SistemaLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/SistemaLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Administrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Pessoa.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,23 +28,82 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="usePluginRegistry" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2XuwHeDGm2iFdOVFFLBA8zk6XNc" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "onboarding.tips.debug.path": "E:/IdeaProjects/LocadoraDeVideosTeste/src/main/java/org/example/Main.java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/IdeaProjects/LocadoraDeVideos&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;E:/IdeaProjects/LocadoraDeVideosTeste/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\IdeaProjects\LocadoraDeVideosTeste" />
+      <recent name="E:\IdeaProjects\LocadoraDeVideosTeste\src\main\java\org" />
+      <recent name="E:\IdeaProjects\LocadoraDeVideosTeste\src\main\java" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\IdeaProjects\LocadoraDeVideos" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Database" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.Sistema.Database" />
+      <module name="LocadoraDeVideosPOO" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.Sistema.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.Plataforma.Main" />
+      <module name="LocadoraDeVideosPOO" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.Plataforma.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Database" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -43,15 +115,7 @@
     </task>
     <servers />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

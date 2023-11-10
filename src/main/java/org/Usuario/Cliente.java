@@ -1,8 +1,8 @@
-package Usuario;
+package org.Usuario;
 
-import Sistema.FilmeInfo;
-import Sistema.Filmes;
-import Sistema.SistemaLogin;
+import org.Sistema.FilmeInfo;
+import org.Sistema.Filmes;
+import org.Sistema.SistemaLogin;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -57,13 +58,106 @@ public class Cliente extends Pessoa implements SistemaLogin {
     }
 
     @Override
-    public void fazerLogin(){
-        // Ler login e senha do usuário e fazer uma busca no arquivo Usuario_BD.json para validar seu login
+    public void fazerLogin() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Scanner scanner = new Scanner(System.in);
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:E:/IdeaProjects/LocadoraDeVideosTeste/DB/userDB.db")) {
+
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
+
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            try (PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Pessoa WHERE Pessoa.Login=? and Pessoa.Senha=?")) {
+                pstmt.setString(1, login);
+                pstmt.setString(2, senha);
+
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        System.out.println("Login efetuado com sucesso!");
+                    } else {
+                        System.out.println("Login ou senha incorretos.");
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void criarConta() {
-        Scanner ler = new Scanner(System.in);
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:E:/IdeaProjects/LocadoraDeVideosTeste/DB/userDB.db")) {
+            String createTable = "CREATE TABLE IF NOT EXISTS Pessoa (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "Nome TEXT," +
+                    "CPF TEXT," +
+                    "Endereco TEXT," +
+                    "Telefone TEXT," +
+                    "Email TEXT," +
+                    "Login TEXT," +
+                    "Senha TEXT)";
+            connection.createStatement().execute(createTable);
+
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
+
+            System.out.print("CPF: ");
+            String cpf = scanner.nextLine();
+
+            System.out.print("Endereço: ");
+            String endereco = scanner.nextLine();
+
+            System.out.print("Telefone: ");
+            String telefone = scanner.nextLine();
+
+            System.out.print("Email: ");
+            String email = scanner.nextLine();
+
+            System.out.print("Login: ");
+            String login = scanner.nextLine();
+
+            System.out.print("Senha: ");
+            String senha = scanner.nextLine();
+
+            String sqlInsert = "INSERT INTO Pessoa(Nome, CPF, Endereco, Telefone, Email, Login, Senha) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement pstmt = connection.prepareStatement(sqlInsert)) {
+                pstmt.setString(1, nome);
+                pstmt.setString(2, cpf);
+                pstmt.setString(3, endereco);
+                pstmt.setString(4, telefone);
+                pstmt.setString(5, email);
+                pstmt.setString(6, login);
+                pstmt.setString(7, senha);
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            String erro = e.getMessage();
+            int indexCPF = erro.indexOf("Pessoa.CPF");
+            int indexLogin = erro.indexOf("Pessoa.Login");
+            int indexEmail = erro.indexOf("Pessoa.Email");
+            if (indexCPF == 81){
+                System.out.println("[Este CPF já existe. Tente outro.]");
+            } else if (indexEmail == 81) {
+                System.out.println("[Este email já existe. Tente outro.]");
+            } else if (indexLogin == 81) {
+                System.out.println("[Este login já existe. Tente outro.]");
+            }
+        }
     }
 
     public void buscarFilme() throws IOException, InterruptedException {

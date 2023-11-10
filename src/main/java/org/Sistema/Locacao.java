@@ -1,4 +1,4 @@
-package Sistema;
+package org.Sistema;
 
 public class Locacao {
     private int codigoLocacao;

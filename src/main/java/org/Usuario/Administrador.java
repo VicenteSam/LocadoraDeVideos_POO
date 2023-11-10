@@ -1,4 +1,4 @@
-package Usuario;
+package org.Usuario;
 
 public class Administrador extends Pessoa{
     public void alterarUsuario(){
