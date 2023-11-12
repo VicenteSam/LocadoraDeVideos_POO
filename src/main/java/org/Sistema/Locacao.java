@@ -14,12 +14,11 @@ public class Locacao {
     }
 
     public String getNomeCliente() {
-        // Retorna nome do Cliente e gera um número único
+        // Retorna nome do Cliente
         return nomeCliente;
     }
 
     public String getCodigoFilme() {
-        // Retorna o código do filme
         return codigoFilme;
     }
 

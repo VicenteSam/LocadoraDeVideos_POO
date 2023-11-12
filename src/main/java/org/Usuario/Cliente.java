@@ -25,13 +25,13 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
     private String cartaoNomeCompleto;
     private String cartaoRegiao;
     private String cartaoCVC;
-    private Connection connection;
+    private final Connection connection;
 
     public Cliente() {
         try {
             Class.forName("org.sqlite.JDBC");
             this.connection = DriverManager.getConnection(
-                    "jdbc:sqlite:E:/IdeaProjects/LocadoraDeVideosTeste/DB/userDB.db");
+                    "jdbc:sqlite:E:/IdeaProjects/LocadoraDeVideosTeste/DB/userDB.db"); // Indicar a sua Path para DB
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -307,11 +307,50 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
     public void listaDeDesejos(){
         try (FileReader reader = new FileReader("lista_desejos.json")) {
             JsonArray listaFilmes = JsonParser.parseReader(reader).getAsJsonArray();
-            System.out.println(listaFilmes);
+
+            System.out.println("""
+            ======================================================
+            Deseja adicionar algum dos filmes na lista de desejos?
+            [1] SIM
+            [Pressione qualquer tecla para sair]
+            ======================================================
+            Opção:""");
+
+            Scanner scanner = new Scanner(System.in);
+            String opcao = scanner.nextLine();
+
+            if(opcao.equals("1")){
+                System.out.println("Lista de Desejos:");
+                for (int i = 0; i < listaFilmes.size(); i++) {
+                    System.out.println("[" + (i + 1) + "] " + listaFilmes.get(i));
+                }
+
+                System.out.println("Escolha o ID do filme para adicionar ao carrinho:");
+                int id = scanner.nextInt();
+
+                if (id >= 1 && id <= listaFilmes.size()) {
+                    String filmeEscolhido = listaFilmes.get(id - 1).getAsString();
+                    adicionarAoCarrinho(filmeEscolhido);
+
+                    System.out.println("Filme adicionado ao carrinho!");
+                } else {
+                    System.out.println("ID inválido. Operação cancelada.");
+                }
+            }
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        // Opção de adicionar ao carrinho
+    }
+
+    private void adicionarAoCarrinho(String filme) {
+        try (FileWriter carrinho = new FileWriter("carrinho.json")) {
+            JsonArray listaCarrinho = new JsonArray();
+            listaCarrinho.add(filme);
+            carrinho.write(listaCarrinho.toString());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -372,8 +411,55 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
 
     @Override
     public void efetuarPagamento() {
-        // Retornar informações do cartão para confirmação
-        // Confirmar pagamento digitando a sua senha do sistema
-        // Comparar senha com a senha do BD
+        String sqlSelect = "SELECT Nome, CPF, Aniversario, Endereco, Telefone, CartaoDigito, CartaoMMAA," +
+                "CartaoNomeCompleto, CartaoRegiao, CartaoCVC FROM Pessoa WHERE Login=?";
+        Scanner scanner = new Scanner(System.in);
+        try (PreparedStatement pstmt = connection.prepareStatement(sqlSelect)) {
+            pstmt.setString(1, getLogin());
+            try(ResultSet rs = pstmt.executeQuery()){
+                if(rs.next()){
+                    setNome(rs.getString("Nome"));
+                    setCpf(rs.getString("CPF"));
+                    setDataDeNascimento(rs.getString("Aniversario"));
+                    setEndereco(rs.getString("Endereco"));
+                    setTelefone(rs.getString("Telefone"));
+                    setCartaoDigito(rs.getString("CartaoDigito"));
+                    setCartaoVencimento(rs.getString("CartaoMMAA"));
+                    setCartaoNomeCompleto(rs.getString("CartaoNomeCompleto"));
+                    setCartaoRegiao(rs.getString("CartaoRegiao"));
+                    setCartaoCVC(rs.getString("CartaoCVC"));
+
+                    System.out.println("""
+                        [Informações Pessoais]
+                        Nome:""" + getNome() + """
+                        \nCPF:""" + getCpf() + """
+                        \nAniversário:""" + getDataDeNascimento() + """
+                        \nEndereço:""" + getEndereco() + """
+                        \nTelefone:""" + getTelefone() + """
+                        \n
+                        [Informações do Cartão]
+                        Dígitos do cartão:""" + getCartaoDigito() + """
+                        \nVencimento do cartão:""" + getCartaoVencimento() + """
+                        \nNome do titular:""" + getCartaoNomeCompleto() + """
+                        \nRegião do Cartão:""" + getCartaoRegiao() + """
+                        \nCVC:""" + getCartaoCVC() + """
+                    """);
+
+                    System.out.println("[Digite sua senha novamente para confirmar locação]");
+                    String senha = scanner.nextLine();
+                    while (!getSenha().equals(senha)) {
+                        System.out.println("Senha incorreta. Tente novamente");
+                        senha = scanner.nextLine();
+                    }
+                    System.out.println("Locação confirmada!");
+                } else {
+                    System.out.println("Nenhum resultado encontrado para o Login: " + getLogin());
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
