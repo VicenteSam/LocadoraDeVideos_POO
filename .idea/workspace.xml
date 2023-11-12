@@ -4,29 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="af975087-c32d-49f1-afd0-e7b163e1de4b" name="Changes" comment="">
+    <list default="true" id="af975087-c32d-49f1-afd0-e7b163e1de4b" name="Changes" comment="update commit">
+      <change afterPath="$PROJECT_DIR$/carrinho.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lista_desejos.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/SistemaPagamento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DB/userDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/DB/userDB.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DB/userDB.sqbpro" beforeDir="false" afterPath="$PROJECT_DIR$/DB/userDB.sqbpro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Plataforma/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Plataforma/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/FilmeInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/FilmeInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/Filmes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/Filmes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/Locacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/Locacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/SistemaLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/SistemaLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Administrador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Pessoa.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -113,9 +119,27 @@
       <option name="presentableId" value="Default" />
       <updated>1699492187071</updated>
     </task>
+    <task id="LOCAL-00001" summary="update commit">
+      <option name="closed" value="true" />
+      <created>1699658537193</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699658537193</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="update commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="update commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((Cliente)this).dataDeNascimento" custom="org.Usuario.Cliente" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

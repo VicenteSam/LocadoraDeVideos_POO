@@ -27,6 +27,8 @@ public class Filmes extends Locacao{
     }
 
     public String getDisponibilidade() {
+        // Verifica no BD se o QtdEmEstoque é maior que 1
+        // Se maior que 1, então está disponível
         return disponibilidade;
     }
 
