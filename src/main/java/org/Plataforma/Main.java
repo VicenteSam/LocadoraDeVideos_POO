@@ -1,14 +1,13 @@
 package org.Plataforma;
 
-import org.Usuario.Cliente;
+import org.Sistema.FuncoesCliente;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Cliente cliente = new Cliente();
+        FuncoesCliente cliente = new FuncoesCliente();
         cliente.sistemaLogin();
-        cliente.buscarFilme();
-        cliente.locarFilmes();
+        cliente.listaDeDesejos();
     }
 }

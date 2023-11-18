@@ -1,24 +1,24 @@
 package org.Sistema;
 
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Filmes extends Locacao{
     private static final AtomicLong codigoCount = new AtomicLong(1);
-
-    private long codigo;
-    private String titulo;
-    private String genero;
-    private String info;
+    private final String uniqueID;
+    private final String titulo;
+    private final String genero;
+    private final String info;
 
     public Filmes(FilmeInfo filmeInfo){
-        this.codigo = codigoCount.getAndIncrement();
+        this.uniqueID = UUID.randomUUID().toString();
         this.titulo = filmeInfo.title();
         this.genero = filmeInfo.genre();
         this.info = filmeInfo.plot();
     }
 
-    public long getCodigo() {
-        return codigo;
+    public String getUniqueID() {
+        return uniqueID;
     }
 
     public String getTitulo() {
@@ -36,7 +36,7 @@ public class Filmes extends Locacao{
     @Override
     public String toString() {
         return "Filme \n" +
-                "Código: " + codigo +
+                "ID: " + uniqueID +
                 "\nTítulo: " + titulo +
                 "\nGenero: " + genero +
                 "\nInfo: " + info;

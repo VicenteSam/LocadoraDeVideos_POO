@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af975087-c32d-49f1-afd0-e7b163e1de4b" name="Changes" comment="update commit">
-      <change afterPath="$PROJECT_DIR$/carrinho.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lista_desejos.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/FuncoesCliente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/FilmeInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/FilmeInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB/userDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/DB/userDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Plataforma/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Plataforma/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/Filmes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/Filmes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/Locacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/Locacao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Administrador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Pessoa.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Pessoa.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -51,20 +54,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/IdeaProjects/LocadoraDeVideos&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;E:/IdeaProjects/LocadoraDeVideosTeste/src/main/java/org/example/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "E:/IdeaProjects/LocadoraDeVideos",
+    "onboarding.tips.debug.path": "E:/IdeaProjects/LocadoraDeVideosTeste/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "advanced.settings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\IdeaProjects\LocadoraDeVideosTeste" />
@@ -81,7 +85,7 @@
       <module name="LocadoraDeVideosPOO" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.Sistema.*" />
+          <option name="PATTERN" value="org.Sistema.FilmesCliente" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -134,7 +138,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699748240621</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update commit">
+      <option name="closed" value="true" />
+      <created>1699821293328</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1699821293328</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

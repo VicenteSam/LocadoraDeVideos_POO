@@ -1,6 +1,8 @@
 package org.Sistema;
 
-public class Locacao {
+import org.Usuario.Cliente;
+
+public class Locacao extends Cliente {
     private int codigoLocacao;
     private String nomeCliente;
     private String codigoFilme;

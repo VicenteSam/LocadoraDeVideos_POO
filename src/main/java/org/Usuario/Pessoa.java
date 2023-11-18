@@ -1,5 +1,7 @@
 package org.Usuario;
 
+import java.sql.Connection;
+
 public class Pessoa {
     private String nome;
     private String cpf;
@@ -8,6 +10,7 @@ public class Pessoa {
     private String email;
     private String login;
     private String senha;
+    protected Connection connection;
 
     public String getLogin() {
         return login;
