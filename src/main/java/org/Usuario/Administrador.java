@@ -1,17 +1,15 @@
 package org.Usuario;
 
+import org.DatabaseProvider.DatabaseProvider;
 import org.Sistema.Locacao;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class Administrador extends Pessoa{
     public Administrador() {
         try {
             Class.forName("org.sqlite.JDBC");
-            this.connection = DriverManager.getConnection(
-                    "jdbc:sqlite:E:/IdeaProjects/LocadoraDeVideosTeste/DB/userDB.db"); // Indicar Path para DB
-        } catch (ClassNotFoundException | SQLException e) {
+            this.connection = DatabaseProvider.getConnection();
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

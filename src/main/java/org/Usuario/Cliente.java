@@ -1,5 +1,7 @@
 package org.Usuario;
 
+import org.DatabaseProvider.DatabaseProvider;
+import org.Sistema.Locacao;
 import org.Sistema.SistemaLogin;
 import org.Sistema.SistemaPagamento;
 import java.sql.*;
@@ -16,9 +18,8 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
     public Cliente() {
         try {
             Class.forName("org.sqlite.JDBC");
-            this.connection = DriverManager.getConnection(
-                    "jdbc:sqlite:E:/IdeaProjects/LocadoraDeVideosTeste/DB/userDB.db"); // Indicar Path para DB
-        } catch (ClassNotFoundException | SQLException e) {
+            this.connection = DatabaseProvider.getConnection();
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -279,6 +280,11 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
                         senha = scanner.nextLine();
                     }
                     System.out.println("Locação confirmada!");
+                    Locacao locacao = new Locacao();
+                    locacao.getCodigoLocacao(getLogin(), connection);
+                    locacao.getNomeCliente(getLogin(), connection);
+                    locacao.getDataLocacao(getLogin(), connection);
+                    locacao.getDataDevolucao(getLogin() ,connection);
                 } else {
                     System.out.println("Nenhum resultado encontrado para o Login: " + getLogin());
                 }

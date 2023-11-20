@@ -21,13 +21,12 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" object-ref="schemas/main/tables/Locacao" />
+      <object connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" object-ref="schemas/main/tables/Locado" />
       <object connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" object-ref="schemas/main/tables/Carrinho" />
-      <object connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" object-ref="schemas/main/tables/Desejado" />
-      <object connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" object-ref="schemas/main/tables/Pessoa" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" dataset="main.Locado" active-filter-id="" />
     <filter-actions connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" dataset="main.Pessoa" active-filter-id="" />
     <filter-actions connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" dataset="main.Carrinho" active-filter-id="" />
     <filter-actions connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" dataset="main.Locacao" active-filter-id="" />
