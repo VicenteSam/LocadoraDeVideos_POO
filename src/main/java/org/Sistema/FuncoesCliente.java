@@ -15,27 +15,29 @@ import java.util.Scanner;
 
 public class FuncoesCliente extends Cliente{
 
-    public void sistemaLogin(){
+    public boolean sistemaLogin(){
         Scanner ler = new Scanner(System.in);
         String opcao;
 
         System.out.println("""
-                ====================================
-                [1] Fazer login
-                [2] Criar conta
-                [Pressione qualquer tecla para sair]
+                \n====================================
+                [1] FAZER LOGIN
+                [2] CRIAR CONTA
+                [PRESSIONE ENTER PARA SAIR]
                 ====================================
                 Opção:""");
         opcao = ler.nextLine();
 
         if (opcao.equals("1")) {
-            fazerLogin();
+            return fazerLogin();
         } else if (opcao.equals("2")) {
-            criarConta();
+            return criarConta();
         }
+        return false;
     }
 
     public void buscarFilme() throws IOException, InterruptedException {
+        System.out.println("\n|========PESQUISE SEU FILME========|");
         Scanner ler = new Scanner(System.in);
         String busca = "";
 
@@ -45,7 +47,7 @@ public class FuncoesCliente extends Cliente{
                 .create();
 
         while (!busca.equalsIgnoreCase("sair")) {
-            System.out.println("[Digite 'sair' para encerrar]\nBuscar filme:");
+            System.out.println("[DIGITE 'sair' PARA ENCERRAR]\nBUSCAR FILME:");
             // Se possível, implementar um algoritmo de correção, caso o usuário digite um título errado
             // Lançar Exception caso o usuário informe um filme que não exista, o programa irá sair automaticamente
             busca = ler.nextLine();
@@ -69,9 +71,9 @@ public class FuncoesCliente extends Cliente{
             System.out.println(filmes);
             System.out.println("""
                     ====================================
-                    [1] Adicionar no carrinho
-                    [2] Adicionar na lista de desejos
-                    [Pressione qualquer tecla para sair]
+                    [1] ADICIONAR AO CARRINHO
+                    [2] ADICIONAR À LISTA DE DESEJOS
+                    [PRESSIONE ENTER PARA SAIR]
                     ====================================
                     Opção:\s""");
             String opcao;
@@ -105,19 +107,26 @@ public class FuncoesCliente extends Cliente{
     }
 
     public void locarFilmes() {
-        System.out.println("Carrinho:");
+        System.out.println("CARRINHO:");
 
         String sqlPrint = "SELECT Titulo FROM Carrinho WHERE Login = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sqlPrint)) {
             pstmt.setString(1, getLogin());
+
             try(ResultSet rs = pstmt.executeQuery()) {
-                while (rs.next()) {
-                    String Titulos = rs.getString("Titulo");
-                    System.out.println(Titulos);
+                if (!rs.next()) {
+                    System.out.println("NENHUM FILME NO CARRINHO");
+                    return;
                 }
+
+                do {
+                    String titulo = rs.getString("Titulo");
+                    System.out.println(titulo);
+                } while (rs.next());
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            return;
         }
 
         try {
@@ -127,10 +136,10 @@ public class FuncoesCliente extends Cliente{
 
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next() && rs.getInt(1) > 0) {
-                    System.out.println("==========Efetuar pagamento==========");
+                    System.out.println("==========EFETUAR PAGAMENTO==========");
                     efetuarPagamento();
                 } else {
-                    System.out.println("==========Cadastrar cartão==========");
+                    System.out.println("==========CADASTRAR CARTÃO==========");
                     cadastrarCartao();
                     efetuarPagamento();
                 }
@@ -141,46 +150,54 @@ public class FuncoesCliente extends Cliente{
     }
 
     public void listaDeDesejos() {
-        System.out.println("Lista de Desejos:");
+        System.out.println("LISTA DE DESEJOS:");
 
-        try {
-            String sqlPrint = "SELECT ID, Titulo FROM Desejado WHERE Login = ?";
-            try (PreparedStatement pstmt = connection.prepareStatement(sqlPrint)) {
-                pstmt.setString(1, getLogin());
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    while (rs.next()) {
-                        String Titulo = rs.getString("Titulo");
-                        int ID = rs.getInt("ID");
-                        System.out.println("ID: " + ID + " | Título: " + Titulo);
-                    }
-                    System.out.println("""
+        String sqlConfirm = "SELECT COUNT(*) FROM Desejado WHERE Login = ? AND Titulo IS NOT NULL";
+        try (PreparedStatement confirmStmt = connection.prepareStatement(sqlConfirm)) {
+            confirmStmt.setString(1, getLogin());
+
+            try (ResultSet countResultSet = confirmStmt.executeQuery()) {
+                if (countResultSet.next() && countResultSet.getInt(1) > 0) {
+                    String sqlPrint = "SELECT ID, Titulo FROM Desejado WHERE Login = ?";
+                    try (PreparedStatement printStmt = connection.prepareStatement(sqlPrint)) {
+                        printStmt.setString(1, getLogin());
+
+                        try (ResultSet resultSet = printStmt.executeQuery()) {
+                            while (resultSet.next()) {
+                                int ID = resultSet.getInt("ID");
+                                String titulo = resultSet.getString("Titulo");
+                                System.out.println("ID: " + ID + " | Título: " + titulo);
+                            }
+
+                            System.out.println("""
                             ======================================================
-                            Deseja adicionar algum dos filmes na lista de desejos?
-                            Digite: 'sim'
-                            [Pressione qualquer tecla para sair]
+                            DESEJA ADICIONAR ALGUM FILME AO CARRINHO?
+                            DIGITE: 'sim'
+                            [PRESSIONE ENTER PARA SAIR]
                             ======================================================
                             Opção:""");
 
-                    Scanner scanner = new Scanner(System.in);
-                    String opcao = scanner.nextLine();
+                            Scanner scanner = new Scanner(System.in);
+                            String opcao = scanner.nextLine();
 
-                    if (opcao.equals("sim")) {
-                        System.out.println("Digite o ID do filme para adicionar ao carrinho:");
-                        int id = scanner.nextInt();
+                            if (opcao.equals("sim")) {
+                                System.out.println("DIGITE O ID DO FILME PARA ADICIONAR AO CARRINHO:");
+                                int id = scanner.nextInt();
 
-                        pstmt.setString(1, getLogin());
-                        if (verificarLista(id)) {
-                            adicionarAoCarrinho(id);
-                            System.out.println("Filme adicionado ao carrinho!");
-                        } else {
-                            System.out.println("ID inválido ou filme não está na lista de desejos.");
+                                if (verificarLista(id)) {
+                                    adicionarAoCarrinho(id);
+                                    System.out.println("FILME ADICIONADO AO CARRINHO!");
+                                } else {
+                                    System.out.println("ID INVÁLIDO OU FILME NÃO ESTÁ NA LISTA DE DESEJOS");
+                                }
+                            }
                         }
                     }
+                } else {
+                    System.out.println("NENHUM FILME NA LISTA DE DESEJOS.");
                 }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
             }
-        } catch (RuntimeException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

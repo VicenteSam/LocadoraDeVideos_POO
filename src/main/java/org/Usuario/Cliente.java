@@ -73,7 +73,7 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
     }
 
     @Override
-    public void fazerLogin() {
+    public boolean fazerLogin() {
         Scanner scanner = new Scanner(System.in);
         try{
             System.out.print("Login: ");
@@ -91,20 +91,22 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
 
                 try (ResultSet rs = pstmt.executeQuery()) {
                     if (rs.next()) {
-                        System.out.println("Login efetuado com sucesso!");
+                        System.out.println("LOGIN EFETUADO COM SUCESSO.");
+                        return true;
                     } else {
-                        System.out.println("Login ou senha incorretos.");
+                        System.out.println("LOGIN OU SENHA INCORRETOS");
+                        return false;
                     }
                 }
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return false;
     }
 
     @Override
-    public void criarConta() {
+    public boolean criarConta() {
         Scanner scanner = new Scanner(System.in);
 
         try{
@@ -179,6 +181,7 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
                 System.out.println("[Este login já existe. Tente outro.]");
             }
         }
+        return true;
     }
 
     @Override
@@ -258,6 +261,7 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
                     setCartaoCVC(rs.getString("CartaoCVC"));
 
                     System.out.println("""
+                        \n|==================================|
                         [Informações Pessoais]
                         Nome:""" + getNome() + """
                         \nCPF:""" + getCpf() + """
@@ -273,13 +277,17 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
                         \nCVC:""" + getCartaoCVC() + """
                     """);
 
-                    System.out.println("[Digite sua senha novamente para confirmar locação]");
+                    System.out.println("|==================================|" +
+                            "\n[Digite sua senha novamente para confirmar locação]");
                     String senha = scanner.nextLine();
                     while (!getSenha().equals(senha)) {
                         System.out.println("Senha incorreta. Tente novamente");
                         senha = scanner.nextLine();
                     }
-                    System.out.println("Locação confirmada!");
+                    System.out.println("\nLOCAÇÃO CONFIRMADA!");
+                    System.out.println("""
+                            |==================================|
+                            [NOTA FISCAL]""");
                     Locacao locacao = new Locacao();
                     locacao.getCodigoLocacao(getLogin(), connection);
                     locacao.getNomeCliente(getLogin(), connection);

@@ -21,8 +21,8 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
+      <object connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" object-ref="schemas/main/tables/Pessoa" />
       <object connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" object-ref="schemas/main/tables/Locado" />
-      <object connection-id="7a820ae5-80e4-4a53-aa49-58823e43416b" object-ref="schemas/main/tables/Carrinho" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">

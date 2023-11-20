@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af975087-c32d-49f1-afd0-e7b163e1de4b" name="Changes" comment="update commit">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB/userDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/DB/userDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Plataforma/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Plataforma/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/FuncoesCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/FuncoesCliente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/Locacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/Locacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Sistema/SistemaLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Sistema/SistemaLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/Usuario/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/Usuario/Cliente.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +167,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700485957395</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update commit">
+      <option name="closed" value="true" />
+      <created>1700486638805</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1700486638805</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

@@ -1,6 +1,6 @@
 package org.Sistema;
 
 public interface SistemaLogin {
-    public void fazerLogin();
-    public void criarConta();
+    public boolean fazerLogin();
+    public boolean criarConta();
 }
