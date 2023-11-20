@@ -21,11 +21,19 @@ public class Locacao extends Cliente {
                     while (rs.next()) {
                         String codigoFilme = rs.getString("CodigoFilme");
                         this.codigoLocacao = pessoa + codigoFilme;
+
                         String sqlInsert = "INSERT INTO Locado(LoginF, CodLocacao) VALUES (?, ?)";
                         try (PreparedStatement insertStmt = connection.prepareStatement(sqlInsert)) {
                         insertStmt.setString(1, pessoa);
                         insertStmt.setString(2, this.codigoLocacao);
                         insertStmt.executeUpdate();
+
+                        String sqlDeleteDesejado = "DELETE FROM Carrinho WHERE Login = ? AND CodigoFilme = ?";
+                        try (PreparedStatement deleteDesejadoStmt = connection.prepareStatement(sqlDeleteDesejado)) {
+                            deleteDesejadoStmt.setString(1, pessoa);
+                            deleteDesejadoStmt.setString(2, codigoFilme);
+                            deleteDesejadoStmt.executeUpdate();
+                        }
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
