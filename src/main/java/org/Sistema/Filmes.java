@@ -1,10 +1,8 @@
 package org.Sistema;
 
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicLong;
 
-public class Filmes extends Locacao{
-    private static final AtomicLong codigoCount = new AtomicLong(1);
+public class Filmes{
     private final String uniqueID;
     private final String titulo;
     private final String genero;
@@ -35,7 +33,7 @@ public class Filmes extends Locacao{
 
     @Override
     public String toString() {
-        return "Filme \n" +
+        return "\nFILME \n" +
                 "ID: " + uniqueID +
                 "\nTítulo: " + titulo +
                 "\nGenero: " + genero +

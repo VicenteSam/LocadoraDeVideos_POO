@@ -1,8 +1,10 @@
 package org.Usuario;
 
+
 import java.sql.Connection;
 
-public class Pessoa {
+public class Pessoa{
+    private String dataDeNascimento;
     private String nome;
     private String cpf;
     private String endereco;
@@ -11,6 +13,14 @@ public class Pessoa {
     private String login;
     private String senha;
     protected Connection connection;
+
+    public String getDataDeNascimento() {
+        return dataDeNascimento;
+    }
+
+    public void setDataDeNascimento(String dataDeNascimento) {
+        this.dataDeNascimento = dataDeNascimento;
+    }
 
     public String getLogin() {
         return login;
@@ -66,6 +76,18 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean fazerLogin() {
+        return false;
+    }
+
+    public boolean criarConta() {
+        return true;
+    }
+
+    public boolean sistemaLogin() {
+        return false;
     }
 }
 

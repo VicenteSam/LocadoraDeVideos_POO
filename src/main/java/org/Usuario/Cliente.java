@@ -1,14 +1,17 @@
 package org.Usuario;
 
 import org.DatabaseProvider.DatabaseProvider;
+import org.Exception.EntradaInvalidaException;
 import org.Sistema.Locacao;
-import org.Sistema.SistemaLogin;
 import org.Sistema.SistemaPagamento;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
-    private String dataDeNascimento;
+public class Cliente extends Pessoa implements SistemaPagamento{
     private String cartaoDigito;
     private String cartaoVencimento;
     private String cartaoNomeCompleto;
@@ -22,14 +25,6 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public String getDataDeNascimento() {
-        return dataDeNascimento;
-    }
-
-    public void setDataDeNascimento(String dataDeNascimento) {
-        this.dataDeNascimento = dataDeNascimento;
     }
 
     public String getCartaoDigito() {
@@ -72,7 +67,6 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
         this.cartaoCVC = cartaoCVC;
     }
 
-    @Override
     public boolean fazerLogin() {
         Scanner scanner = new Scanner(System.in);
         try{
@@ -105,11 +99,10 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
         return false;
     }
 
-    @Override
     public boolean criarConta() {
         Scanner scanner = new Scanner(System.in);
 
-        try{
+        try {
             String createTable = "CREATE TABLE IF NOT EXISTS Pessoa (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "Nome TEXT NOT NULL," +
@@ -122,37 +115,70 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
                     "Senha TEXT NOT NULL)";
             connection.createStatement().execute(createTable);
 
-            System.out.print("Nome: ");
-            String nome = scanner.nextLine();
-            setNome(nome);
+            boolean valida = false;
 
-            System.out.print("CPF: ");
-            String cpf = scanner.nextLine();
-            setCpf(cpf);
+            while (!valida){
+                try {
+                    System.out.print("Nome: ");
+                    String nome = scanner.nextLine();
+                    setNome(nome);
+                    if (!nome.matches("[a-zA-Z\\s]+")) {
+                        throw new EntradaInvalidaException("Nome deve conter apenas letras.");
+                    }
 
-            System.out.print("Data de nascimento [DD/MM/AAAA]:  ");
-            String aniversario = scanner.nextLine();
-            setDataDeNascimento(aniversario);
+                    System.out.print("CPF: ");
+                    String cpf = scanner.nextLine();
+                    setCpf(cpf);
+                    if (!cpf.matches("\\d+")) {
+                        throw new EntradaInvalidaException("CPF deve conter apenas números.");
+                    }
 
-            System.out.print("Endereço: ");
-            String endereco = scanner.nextLine();
-            setEndereco(endereco);
+                    System.out.print("Data de nascimento [DD/MM/AAAA]:  ");
+                    String aniversario = scanner.nextLine();
+                    setDataDeNascimento(aniversario);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                    try {
+                        dateFormat.parse(aniversario);
+                    } catch (ParseException e) {
+                        throw new EntradaInvalidaException("Formato de data de nascimento inválido. Use o formato [DD/MM/AAAA].");
+                    }
 
-            System.out.print("Telefone: ");
-            String telefone = scanner.nextLine();
-            setTelefone(telefone);
+                    System.out.print("Endereço: ");
+                    String endereco = scanner.nextLine();
+                    setEndereco(endereco);
 
-            System.out.print("Email: ");
-            String email = scanner.nextLine();
-            setEmail(email);
+                    System.out.print("Telefone [DDD91111000]: ");
+                    String telefone = scanner.nextLine();
+                    setTelefone(telefone);
+                    if (!telefone.matches("\\d+")) {
+                        throw new EntradaInvalidaException("Telefone deve conter apenas números.");
+                    }
 
-            System.out.print("Login: ");
-            String login = scanner.nextLine();
-            setLogin(login);
+                    System.out.print("Email: ");
+                    String email = scanner.nextLine();
+                    setEmail(email);
+                    if (!validaEmail(email)) {
+                        throw new EntradaInvalidaException("Email inválido.");
+                    }
 
-            System.out.print("Senha: ");
-            String senha = scanner.nextLine();
-            setSenha(senha);
+                    System.out.print("Login: ");
+                    String login = scanner.nextLine();
+                    setLogin(login);
+
+                    System.out.print("Senha: ");
+                    String senha = scanner.nextLine();
+                    setSenha(senha);
+
+                    if (nome.isEmpty() || cpf.isEmpty() || aniversario.isEmpty() || endereco.isEmpty() ||
+                            telefone.isEmpty() || email.isEmpty() || login.isEmpty() || senha.isEmpty()) {
+                        throw new EntradaInvalidaException("Nenhum campo pode ficar em branco.");
+                    }
+                    valida = true;
+                } catch (EntradaInvalidaException e) {
+                    System.out.println("Entrada inválida: " + e.getMessage());
+                    return false;
+                }
+            }
 
             String sqlInsert = "INSERT INTO Pessoa(Nome, CPF, Aniversario, Endereco, Telefone, Email, Login, Senha)" +
                     " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -173,7 +199,7 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
             int indexCPF = erro.indexOf("Pessoa.CPF");
             int indexLogin = erro.indexOf("Pessoa.Login");
             int indexEmail = erro.indexOf("Pessoa.Email");
-            if (indexCPF == 81){
+            if (indexCPF == 81) {
                 System.out.println("[Este CPF já existe. Tente outro.]");
             } else if (indexEmail == 81) {
                 System.out.println("[Este email já existe. Tente outro.]");
@@ -181,11 +207,41 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
                 System.out.println("[Este login já existe. Tente outro.]");
             }
         }
+        System.out.println("Conta criada com sucesso!");
         return true;
     }
 
+    private boolean validaEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    public boolean sistemaLogin(){
+        Scanner ler = new Scanner(System.in);
+        String opcao;
+
+        System.out.println("""
+                ENTRE COM SUA CONTA OU CRIE UMA!
+                ====================================
+                [1] FAZER LOGIN
+                [2] CRIAR CONTA
+                [PRESSIONE ENTER PARA SAIR]
+                ====================================
+                Opção:""");
+        opcao = ler.nextLine();
+
+        if (opcao.equals("1")) {
+            return fazerLogin();
+        } else if (opcao.equals("2")) {
+            return criarConta();
+        }
+        return false;
+    }
+
     @Override
-    public void cadastrarCartao() {
+    public boolean cadastrarCartao() {
         Scanner scanner = new Scanner(System.in);
 
         try{
@@ -197,31 +253,57 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
                     "CartaoCVC TEXT UNIQUE NOT NULL)";
             connection.createStatement().execute(createTable);
 
-            System.out.print("Dígitos do cartão: \n");
-            System.out.println("[Exemplo: 0000111122223333]");
-            System.out.println(scanner.hasNextLine());
-            String cartaoDigito = scanner.nextLine();
-            setCartaoDigito(cartaoDigito);
+            boolean valida = false;
 
-            System.out.print("Data de vencimento do cartão: \n");
-            System.out.println("[Exemplo: MM/AA]");
-            String cartaoVencimento = scanner.nextLine();
-            setCartaoVencimento(cartaoVencimento);
+            while (!valida) {
+                try {
+                    System.out.print("Dígitos do cartão: \n");
+                    System.out.println("[Exemplo: 0000111122223333]");
+                    String cartaoDigito = scanner.nextLine();
+                    setCartaoDigito(cartaoDigito);
+                    if (!cartaoDigito.matches("\\d+")) {
+                        System.out.println("Dígitos do cartão devem conter apenas números.");
+                        throw new EntradaInvalidaException("Dígitos do cartão devem conter apenas números.");
+                    }
 
-            System.out.print("Nome do titular:  \n");
-            System.out.println("[Exemplo: João H. S.]");
-            String nomeTitular = scanner.nextLine();
-            setCartaoNomeCompleto(nomeTitular);
+                    System.out.print("Data de vencimento do cartão: \n");
+                    System.out.println("[Exemplo: MM/AA]");
+                    String cartaoVencimento = scanner.nextLine();
+                    setCartaoVencimento(cartaoVencimento);
+                    if (!cartaoVencimento.matches("(0[1-9]|1[0-2])/\\d{2}")) {
+                        throw new EntradaInvalidaException("Formato de data de vencimento inválido. Use o formato MM/AA.");
+                    }
 
-            System.out.print("Região: \n");
-            System.out.println("[Exemplo: Brasil]");
-            String regiao = scanner.nextLine();
-            setCartaoRegiao(regiao);
+                    System.out.print("Nome do titular:  \n");
+                    System.out.println("[Exemplo: João H. S.]");
+                    String nomeTitular = scanner.nextLine();
+                    setCartaoNomeCompleto(nomeTitular);
+                    if (!nomeTitular.matches("[a-zA-Z\\s.]+")) {
+                        throw new EntradaInvalidaException("Nome do titular deve conter apenas letras, espaços e pontos.");
+                    }
 
-            System.out.print("CVC: \n");
-            System.out.println("[Exemplo: 000]");
-            String cvc = scanner.nextLine();
-            setCartaoCVC(cvc);
+                    System.out.print("Região: \n");
+                    System.out.println("[Exemplo: Brasil]");
+                    String regiao = scanner.nextLine();
+                    setCartaoRegiao(regiao);
+                    if (!regiao.matches("[a-zA-Z]+")) {
+                        throw new EntradaInvalidaException("Região deve conter apenas letras.");
+                    }
+
+                    System.out.print("CVC: \n");
+                    System.out.println("[Exemplo: 000]");
+                    String cvc = scanner.nextLine();
+                    setCartaoCVC(cvc);
+                    if (!cvc.matches("\\d+")) {
+                        throw new EntradaInvalidaException("CVC deve conter apenas números.");
+                    }
+
+                    valida = true;
+                } catch (EntradaInvalidaException e) {
+                    System.out.println("Entrada inválida: " + e.getMessage());
+                    return false;
+                }
+            }
 
 
             String sqlInsert = "UPDATE Pessoa SET CartaoDigito=?, CartaoMMAA=?, CartaoNomeCompleto=?, " +
@@ -236,8 +318,10 @@ public class Cliente extends Pessoa implements SistemaLogin, SistemaPagamento {
                 pstmt.executeUpdate();
             }
         } catch (SQLException e){
-            System.out.println(e.getMessage());
+            System.out.println("DADOS JÁ CADASTRADOS.");
+            return false;
         }
+        return true;
     }
 
     @Override

@@ -1,15 +1,13 @@
 package org.Sistema;
 
-import org.Usuario.Cliente;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Locacao extends Cliente {
+public class Locacao{
     private String codigoLocacao;
     private String nomeCliente;
-
 
     public void getCodigoLocacao(String pessoa, Connection connection) {
         try{
@@ -105,4 +103,5 @@ public class Locacao extends Cliente {
             throw new RuntimeException(e);
         }
     }
+
 }

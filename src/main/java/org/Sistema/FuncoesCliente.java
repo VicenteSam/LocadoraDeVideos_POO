@@ -15,27 +15,6 @@ import java.util.Scanner;
 
 public class FuncoesCliente extends Cliente{
 
-    public boolean sistemaLogin(){
-        Scanner ler = new Scanner(System.in);
-        String opcao;
-
-        System.out.println("""
-                \n====================================
-                [1] FAZER LOGIN
-                [2] CRIAR CONTA
-                [PRESSIONE ENTER PARA SAIR]
-                ====================================
-                Opção:""");
-        opcao = ler.nextLine();
-
-        if (opcao.equals("1")) {
-            return fazerLogin();
-        } else if (opcao.equals("2")) {
-            return criarConta();
-        }
-        return false;
-    }
-
     public void buscarFilme() throws IOException, InterruptedException {
         System.out.println("\n|========PESQUISE SEU FILME========|");
         Scanner ler = new Scanner(System.in);
@@ -48,8 +27,7 @@ public class FuncoesCliente extends Cliente{
 
         while (!busca.equalsIgnoreCase("sair")) {
             System.out.println("[DIGITE 'sair' PARA ENCERRAR]\nBUSCAR FILME:");
-            // Se possível, implementar um algoritmo de correção, caso o usuário digite um título errado
-            // Lançar Exception caso o usuário informe um filme que não exista, o programa irá sair automaticamente
+
             busca = ler.nextLine();
             if(busca.equalsIgnoreCase("sair")){
                 break;
@@ -68,6 +46,11 @@ public class FuncoesCliente extends Cliente{
             String json = response.body();
             FilmeInfo filmeInfo = gson.fromJson(json, FilmeInfo.class);
             Filmes filmes = new Filmes(filmeInfo);
+            if (filmes.getTitulo() == null){
+                System.out.println("[FILME NÃO ENCONTRADO]");
+                break;
+            }
+
             System.out.println(filmes);
             System.out.println("""
                     ====================================
@@ -107,7 +90,7 @@ public class FuncoesCliente extends Cliente{
     }
 
     public void locarFilmes() {
-        System.out.println("CARRINHO:");
+        System.out.println("\nCARRINHO:");
 
         String sqlPrint = "SELECT Titulo FROM Carrinho WHERE Login = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sqlPrint)) {
@@ -140,8 +123,10 @@ public class FuncoesCliente extends Cliente{
                     efetuarPagamento();
                 } else {
                     System.out.println("==========CADASTRAR CARTÃO==========");
-                    cadastrarCartao();
-                    efetuarPagamento();
+                    if(cadastrarCartao())
+                    {
+                        efetuarPagamento();
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -150,7 +135,7 @@ public class FuncoesCliente extends Cliente{
     }
 
     public void listaDeDesejos() {
-        System.out.println("LISTA DE DESEJOS:");
+        System.out.println("\nLISTA DE DESEJOS:");
 
         String sqlConfirm = "SELECT COUNT(*) FROM Desejado WHERE Login = ? AND Titulo IS NOT NULL";
         try (PreparedStatement confirmStmt = connection.prepareStatement(sqlConfirm)) {
