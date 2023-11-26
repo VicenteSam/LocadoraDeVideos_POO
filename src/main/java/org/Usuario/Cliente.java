@@ -195,7 +195,6 @@ public class Cliente extends Pessoa implements SistemaPagamento{
             }
         } catch (SQLException e) {
             String erro = e.getMessage();
-            System.out.println(erro);
             int indexCPF = erro.indexOf("Pessoa.CPF");
             int indexLogin = erro.indexOf("Pessoa.Login");
             int indexEmail = erro.indexOf("Pessoa.Email");
@@ -205,9 +204,11 @@ public class Cliente extends Pessoa implements SistemaPagamento{
                 System.out.println("[Este email já existe. Tente outro.]");
             } else if (indexLogin == 81) {
                 System.out.println("[Este login já existe. Tente outro.]");
+            } else {
+                System.out.println("Conta criada com sucesso!");
+                return true;
             }
         }
-        System.out.println("Conta criada com sucesso!");
         return true;
     }
 

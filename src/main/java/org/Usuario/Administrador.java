@@ -101,7 +101,7 @@ public class Administrador extends Pessoa{
 
     public void buscarLocacao(){
         Scanner ler = new Scanner(System.in);
-        System.out.println("Código de Locação");
+        System.out.println("Código de Locação:");
         String pesquisa = ler.nextLine();
 
         String sqlSelect = "SELECT LoginF, Titulo, DataLocacao, DataDevolucao, Nome, Mensagem" +
@@ -248,7 +248,6 @@ public class Administrador extends Pessoa{
             }
         } catch (SQLException e) {
             String erro = e.getMessage();
-            System.out.println(erro);
             int indexCPF = erro.indexOf("Pessoa.CPF");
             int indexLogin = erro.indexOf("Pessoa.Login");
             int indexEmail = erro.indexOf("Pessoa.Email");
@@ -258,6 +257,9 @@ public class Administrador extends Pessoa{
                 System.out.println("[Este email já existe. Tente outro.]");
             } else if (indexLogin == 81) {
                 System.out.println("[Este login já existe. Tente outro.]");
+            } else {
+                System.out.println("Conta criada com sucesso!");
+                return true;
             }
         }
         return true;
