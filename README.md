@@ -2,7 +2,7 @@
 Projeto final de POO.
 Título do Projeto: Locadora de vídeos online
 
-Equipe: Rafael da Silva, Thiago Lima, Vicente Sampaio e William Faray
+Equipe: Rafael da Silva, Vicente Sampaio e William Faray
 
 Data da Entrega: 30/10/2023
 
