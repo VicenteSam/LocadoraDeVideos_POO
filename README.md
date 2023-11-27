@@ -48,4 +48,5 @@ Diagrama de Casos de Uso
 
 
 Conclusão
+
 Esta documentação fornece uma visão geral do sistema a ser desenvolvido no projeto final de Programação Orientada a Objetos. Ela estabelece os objetivos, funcionalidades e regras de negócio que orientarão o processo de desenvolvimento. Cada membro da equipe é responsável por contribuir para a implementação bem-sucedida do sistema de acordo com as especificações fornecidas neste documento.
