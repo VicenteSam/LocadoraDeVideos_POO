@@ -1,8 +1,7 @@
 # LocadoraDeVideos_POO
+![image](https://github.com/VicenteSam/LocadoraDeVideos_POO/assets/141889498/5bf0feca-5673-405e-b092-952e8b4c9f47)
 Projeto final de POO.
 Título do Projeto: Locadora de vídeos online
-
-![image](https://github.com/VicenteSam/LocadoraDeVideos_POO/assets/141889498/5bf0feca-5673-405e-b092-952e8b4c9f47)
 
 Equipe: Rafael da Silva, Vicente Sampaio e William Faray
 
